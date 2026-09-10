@@ -5,7 +5,7 @@ stages {
 
     stage('Git Checkout') {
         steps {
-            git 'https://github.com/betawins/Trading-UI.git'
+            git 'https://github.com/javeedpasha2409-boop/Terraform.git'
         }
     }
 
