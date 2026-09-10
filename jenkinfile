@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs 'NodeJS'
+    }
+
     stages {
 
         stage('Checkout') {
@@ -9,27 +13,27 @@ pipeline {
             }
         }
 
-        stage('Terraform Init') {
+        stage('Install Dependencies') {
             steps {
-                sh 'terraform init'
+                sh 'npm install'
             }
         }
 
-        stage('Terraform Validate') {
+        stage('Test') {
             steps {
-                sh 'terraform validate'
+                sh 'npm test'
             }
         }
 
-        stage('Terraform Plan') {
+        stage('Build') {
             steps {
-                sh 'terraform plan -out=tfplan'
+                sh 'npm run build'
             }
         }
 
-        stage('Terraform Apply') {
+        stage('Deploy') {
             steps {
-                sh 'terraform apply --auto-approve tfplan'
+                echo 'Deploying Trading UI application...'
             }
         }
     }
